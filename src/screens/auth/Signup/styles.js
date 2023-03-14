@@ -4,10 +4,24 @@ import {colors} from '../../../utils/colors';
 export const styles = StyleSheet.create({
   container: {
     padding: 24,
-    flexDirection: 'column',
     // justifyContent: 'center',
+    // flexDirection: 'column',
     // alignItems: 'center',
-    height: '100%',
+    // height: '100%',
+  },
+  agreedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  agreedText: {
+    color: colors.blue,
+    marginHorizontal: 13,
+  },
+  agreedTextBold: {
+    fontWeight: 'bold',
+  },
+  button: {
+    marginVertical: 20,
   },
   image: {
     width: '100%',
