@@ -5,8 +5,11 @@ import Splash from './src/screens/auth/Splash';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Config from 'react-native-config';
 import Signin from './src/screens/auth/Signin';
-const WEB_CLIENT_ID =
-  '806988529228-vsomgtbgb23pakb5gc80vf56dr5a7137.apps.googleusercontent.com';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {colors} from './src/utils/colors';
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   useEffect(() => {
@@ -18,11 +21,20 @@ function App() {
     });
   }, []);
 
+  const theme = {
+    colors: {
+      background: colors.white,
+    },
+  };
+
   return (
-    <SafeAreaView>
-      {/* <Splash /> */}
-      <Signin />
-    </SafeAreaView>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Signin" component={Signin} />
+        <Stack.Screen name="Signup" component={Signup} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
