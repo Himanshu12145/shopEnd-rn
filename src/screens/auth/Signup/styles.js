@@ -46,5 +46,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 30,
   },
+  footerLink: {
+    fontWeight: 'bold',
+  },
   buttonCont: {width: '100%', flexDirection: 'row'},
 });
