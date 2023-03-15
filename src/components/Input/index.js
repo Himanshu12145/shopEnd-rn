@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Image, Pressable, Text, TextInput, View} from 'react-native';
+import {colors} from '../../utils/colors';
 import {styles} from './styles';
 
 const Input = ({label, placeholder, isPassword}) => {
@@ -14,6 +15,7 @@ const Input = ({label, placeholder, isPassword}) => {
         <TextInput
           secureTextEntry={isPassword && !isPasswordVisible}
           placeholder={placeholder}
+          placeholderTextColor={colors.grey}
           style={styles.input}
         />
         {isPassword ? (
