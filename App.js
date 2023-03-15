@@ -4,6 +4,7 @@ import Signup from './src/screens/auth/Signup';
 import Splash from './src/screens/auth/Splash';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Config from 'react-native-config';
+import Signin from './src/screens/auth/Signin';
 const WEB_CLIENT_ID =
   '806988529228-vsomgtbgb23pakb5gc80vf56dr5a7137.apps.googleusercontent.com';
 
@@ -20,7 +21,7 @@ function App() {
   return (
     <SafeAreaView>
       {/* <Splash /> */}
-      <Signup />
+      <Signin />
     </SafeAreaView>
   );
 }
