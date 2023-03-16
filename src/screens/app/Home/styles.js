@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   },
   list: {
     paddingVertical: 24,
-    marginTop: 16,
+    marginTop: 8,
   },
   productsList: {
     paddingHorizontal: 16,

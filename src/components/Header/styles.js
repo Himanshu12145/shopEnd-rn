@@ -4,9 +4,9 @@ import {colors} from '../../utils/colors';
 export const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: 24,
+    paddingTop: 14,
   },
   container: {
-    paddingHorizontal: 24,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import React from 'react';
+import {Pressable, Text, View, Image} from 'react-native';
 import {colors} from '../../utils/colors';
-import Input from '../Input';
 import {styles} from './styles';
 
 const CategoryBox = ({title, image, onPress, isFirst, isSelected}) => {
@@ -14,7 +13,7 @@ const CategoryBox = ({title, image, onPress, isFirst, isSelected}) => {
           styles.imageContainer,
           isSelected ? {backgroundColor: colors.black} : {},
         ]}>
-        <Image source={{uri: image}} style={styles.image} />
+        <Image style={styles.image} source={{uri: image}} />
       </View>
       <Text
         style={[

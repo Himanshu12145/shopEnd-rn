@@ -4,6 +4,8 @@ import {colors} from '../../utils/colors';
 export const styles = StyleSheet.create({
   container: {
     marginHorizontal: 8,
+    // marginTop: 0,
+    // marginVertical: 10,
     paddingVertical: 18,
     flexDirection: 'column',
     justifyContent: 'center',
