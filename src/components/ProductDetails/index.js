@@ -21,18 +21,17 @@ const ProductDetails = ({route, navigation}) => {
     navigation.goBack();
   };
 
-  // const onContact = () => {
-  //   // Make a phone call
-  //   const phone = '127282827';
-  //   Linking.openURL(`tel:${phone}`);
+  const onContact = () => {
+    // Make a phone call
+    const phone = '127282827';
+    Linking.openURL(`tel:${phone}`);
 
-  //   // Send an Email
-  //   const email = 'support@mail.com';
-  //   Linking.openURL(`mailto:${email}`);
-  // };
+    // Send an Email
+    const email = 'support@mail.com';
+    Linking.openURL(`mailto:${email}`);
+  };
 
   const onBookmark = () => {};
-  const onContact = () => {};
 
   // const onBookmark = async () => {
   //   const data = await updateService(product?._id, {liked: true});
