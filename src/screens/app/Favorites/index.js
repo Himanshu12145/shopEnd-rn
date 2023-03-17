@@ -14,9 +14,9 @@ const Favorites = ({navigation}) => {
   //   : [];
 
   const renderItem = ({item}) => {
-    // const onProductPress = () => {
-    //   navigation.navigate('ProductDetails', {product: item});
-    // };
+    const onProductPress = () => {
+      navigation.navigate('ProductDetails', {product: item});
+    };
     // const onRemove = async () => {
     //   const updatedServices = await updateService(item?._id, {liked: false});
     //   if (Array.isArray(updatedServices)) {
@@ -32,7 +32,7 @@ const Favorites = ({navigation}) => {
     // };
     return (
       <FavoriteItem
-        // onPress={onProductPress}
+        onPress={onProductPress}
         // onIconPress={onIconPress}
         {...item}
       />
