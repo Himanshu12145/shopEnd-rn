@@ -4,6 +4,7 @@ import {styles} from './styles';
 // import Config from 'react-native-config';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Button from '../Button';
+import ImageCarousel from '../ImageCarousel';
 // import ImageCarousel from '../../../components/ImageCarousel';
 // import {updateService} from '../../../utils/backendCalls';
 // import {ServicesContext} from '../../../../App';
@@ -40,13 +41,19 @@ const ProductDetails = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <ScrollView>
-        <Image style={styles.image} source={{uri: product?.image}} />
+      <ScrollView style={styles.container}>
+        {product?.images?.length ? (
+          <ImageCarousel images={product?.images} />
+        ) : (
+          <Image style={styles.image} source={{uri: product?.image}} />
+        )}
+
         <View style={styles.content}>
           <Text style={styles.title}>{product?.title}</Text>
           <Text style={styles.price}>{product?.price}</Text>
           <Text style={styles.description}>{product?.description}</Text>
         </View>
+
         <Pressable onPress={onBackPress} style={styles.backContainer}>
           <Image
             style={styles.backIcon}
@@ -54,6 +61,7 @@ const ProductDetails = ({route, navigation}) => {
           />
         </Pressable>
       </ScrollView>
+
       <View style={styles.footer}>
         <Pressable onPress={onBookmark} style={styles.bookmarkContainer}>
           <Image
@@ -65,6 +73,7 @@ const ProductDetails = ({route, navigation}) => {
             }
           />
         </Pressable>
+
         <Button onPress={onContact} title="Contact Seller" />
       </View>
       {/* <ScrollView style={styles.container}>
