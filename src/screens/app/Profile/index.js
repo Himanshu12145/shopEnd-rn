@@ -11,6 +11,9 @@ const Profile = ({navigation}) => {
   const onSettingsPress = () => {
     navigation.navigate('Settings');
   };
+  const onNewListingPress = () => {
+    navigation.navigate('CreateListing');
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header title="Profile" showLogout onLogout={onLogout} />
@@ -25,10 +28,14 @@ const Profile = ({navigation}) => {
             subtitle={`Account , FAQ's,Contact`}
           />
         </View>
-        <Button style={{flex: 0}} title="Add New Listing" />
+        <Button
+          onPress={onNewListingPress}
+          style={{flex: 0}}
+          title="Add New Listing"
+        />
       </View>
     </SafeAreaView>
   );
 };
 
-export default Profile;
+export default React.memo(Profile);

@@ -49,4 +49,4 @@ const Signup = ({navigation}) => {
   );
 };
 
-export default Signup;
+export default React.memo(Signup);

@@ -38,4 +38,4 @@ const Signin = ({navigation}) => {
   );
 };
 
-export default Signin;
+export default React.memo(Signin);

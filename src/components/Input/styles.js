@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     flex: 1,
-    color: colors.lightGrey,
+    color: colors.grey,
   },
   modalWrapper: {
     backgroundColor: 'rgba(0,0,0,0.5)',
@@ -54,9 +54,13 @@ export const styles = StyleSheet.create({
     width: '80%',
   },
   headerTitle: {
-    marginBottom: 16,
+    marginBottom: 10,
+    paddingBottom: 16,
     color: colors.black,
     fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grey,
+    borderStyle: 'dotted',
   },
   optionText: {
     color: colors.black,

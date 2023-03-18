@@ -81,4 +81,4 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
