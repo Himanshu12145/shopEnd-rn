@@ -5,9 +5,12 @@ import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import ListItem from '../../../components/ListItem';
 import {styles} from './styles';
-const Profile = () => {
+const Profile = ({navigation}) => {
   const num = 10;
   const onLogout = () => {};
+  const onSettingsPress = () => {
+    navigation.navigate('Settings');
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <Header title="Profile" showLogout onLogout={onLogout} />
@@ -16,7 +19,11 @@ const Profile = () => {
           <Text style={styles.name}>User Name</Text>
           <Text style={styles.email}>User Email</Text>
           <ListItem title="My Listings" subtitle={`You have ${num} listings`} />
-          <ListItem title="Settings" subtitle={`Account , FAQ's,Contact`} />
+          <ListItem
+            onPress={onSettingsPress}
+            title="Settings"
+            subtitle={`Account , FAQ's,Contact`}
+          />
         </View>
         <Button style={{flex: 0}} title="Add New Listing" />
       </View>
