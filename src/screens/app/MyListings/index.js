@@ -1,13 +1,14 @@
 import React, {useContext} from 'react';
-import {Alert, FlatList, Text} from 'react-native';
+import {Alert, FlatList, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import FavoriteItem from '../../../components/FavoriteItem';
 import Header from '../../../components/Header';
 import {ServicesContext} from '../../../../App';
 import {updateService} from '../../../utils/backendCalls';
 import {products} from '../../../data/products';
+import Button from '../../../components/Button';
 
-const Favorites = ({navigation}) => {
+const MyListings = ({navigation}) => {
   // const {services, setServices} = useContext(ServicesContext);
   // const likedServices = Array.isArray(services)
   //   ? services?.filter(service => service?.liked)
@@ -33,21 +34,44 @@ const Favorites = ({navigation}) => {
     return (
       <FavoriteItem
         onPress={onProductPress}
+        icon={require('../../../assets/delete.png')}
         // onIconPress={onIconPress}
         {...item}
       />
     );
   };
-
+  const goBack = () => navigation.goBack();
   return (
     <SafeAreaView>
-      <Header title="Favorites" />
+      <Header title="My Listings" showBack onBackPress={goBack} />
 
       <FlatList
         ListEmptyComponent={
-          <Text style={{textAlign: 'center', marginTop: 40, color: 'black'}}>
-            You do not have any favorites yet
-          </Text>
+          <>
+            <View
+              style={{
+                flexGrow: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{marginTop: 100, color: 'black'}}>...</Text>
+              <Text
+                style={{
+                  marginTop: 10,
+                  color: 'black',
+                  fontSize: 18,
+                }}>
+                You do not have any Listings yet
+              </Text>
+              <Text style={{marginTop: 10, color: 'black'}}>...</Text>
+            </View>
+            <View style={{padding: 24}}>
+              <Button
+                onPress={() => navigation.navigate('CreateListing')}
+                title="Add New Listing"
+              />
+            </View>
+          </>
         }
         data={products}
         renderItem={renderItem}
@@ -57,4 +81,4 @@ const Favorites = ({navigation}) => {
   );
 };
 
-export default React.memo(Favorites);
+export default React.memo(MyListings);

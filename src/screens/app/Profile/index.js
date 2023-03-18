@@ -11,6 +11,9 @@ const Profile = ({navigation}) => {
   const onSettingsPress = () => {
     navigation.navigate('Settings');
   };
+  const onMyListingsPress = () => {
+    navigation.navigate('MyListings');
+  };
   const onNewListingPress = () => {
     navigation.navigate('CreateListing');
   };
@@ -21,7 +24,11 @@ const Profile = ({navigation}) => {
         <View style={styles.content}>
           <Text style={styles.name}>User Name</Text>
           <Text style={styles.email}>User Email</Text>
-          <ListItem title="My Listings" subtitle={`You have ${num} listings`} />
+          <ListItem
+            onPress={onMyListingsPress}
+            title="My Listings"
+            subtitle={`You have ${num} listings`}
+          />
           <ListItem
             onPress={onSettingsPress}
             title="Settings"
