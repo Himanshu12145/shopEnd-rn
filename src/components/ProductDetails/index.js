@@ -16,7 +16,6 @@ const ProductDetails = ({route, navigation}) => {
   //   service => service?._id === params?.product?._id,
   // );
   const {product} = route?.params || {};
-  console.log(product);
   const onBackPress = () => {
     navigation.goBack();
   };

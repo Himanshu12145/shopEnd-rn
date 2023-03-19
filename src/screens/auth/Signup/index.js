@@ -1,5 +1,5 @@
 import {Alert, ScrollView, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {styles} from './styles';
 import AuthHeader from '../../../components/AuthHeader';
 import Input from '../../../components/Input';
@@ -9,10 +9,13 @@ import Separator from '../../../components/Separator';
 import GoogleLogin from '../../../components/GoogleLogin';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {request} from '../../../utils/request';
+import {UserContext} from '../../../../App';
+import {signup} from '../../../utils/backendCalls';
 
 const Signup = ({navigation}) => {
   const [checked, setChecked] = useState(false);
   const [values, setValues] = useState({});
+  const {setUser} = useContext(UserContext);
 
   const onChange = (key, value) => {
     setValues(v => ({...v, [key]: value}));
@@ -46,16 +49,8 @@ const Signup = ({navigation}) => {
         return;
       }
 
-      // const token = await signup(values);
-      // setUser({token});
-
-      const response = await request({
-        url: '/user/register',
-        method: 'POST',
-        data: values,
-      });
-
-      console.log(response);
+      const token = await signup(values);
+      setUser({token});
 
       console.log('token :>> ', token);
     } catch (error) {
