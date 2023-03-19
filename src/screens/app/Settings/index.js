@@ -1,23 +1,33 @@
-import React, {useState} from 'react';
-import {ScrollView, Text, View, Linking, Image, Pressable} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {Image, Linking, Pressable, ScrollView, Text, View} from 'react-native';
+import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Button from '../../../components/Button';
-import EditableBox from '../../../components/EditableBox';
 import Header from '../../../components/Header';
 import ListItem from '../../../components/ListItem';
-import {styles} from './styles';
+import EditableBox from '../../../components/EditableBox';
+import Button from '../../../components/Button';
+import {ProfileContext} from '../../../../App';
+import {updateProfile} from '../../../utils/backendCalls';
 
 const Settings = ({navigation}) => {
   const [editing, setEditing] = useState(false);
-  const [values, setValues] = useState({name: 'User', email: 'user@email.com'});
+  const {profile, setProfile} = useContext(ProfileContext);
+  const [values, setValues] = useState({
+    _id: profile?._id,
+    fullName: profile?.fullName,
+    email: profile?.email,
+  });
 
   const onEditPress = () => {
     setEditing(true);
   };
 
-  const onSave = () => {
+  const onSave = async () => {
+    const updatedProfile = await updateProfile(values);
+    setProfile(updatedProfile);
     setEditing(false);
   };
+
   const onChange = (key, value) => {
     setValues(v => ({...v, [key]: value}));
   };
@@ -25,6 +35,7 @@ const Settings = ({navigation}) => {
   const onItemPress = () => {
     Linking.openURL('https://google.com');
   };
+
   const goBack = () => {
     navigation.goBack();
   };
@@ -44,8 +55,8 @@ const Settings = ({navigation}) => {
         </View>
         <EditableBox
           label="Name"
-          onChangeText={v => onChange('name', v)}
-          value={values.name}
+          onChangeText={v => onChange('fullName', v)}
+          value={values.fullName}
           editable={editing}
         />
         <EditableBox
