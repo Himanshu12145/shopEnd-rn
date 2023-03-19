@@ -46,6 +46,7 @@ export const getProfile = async () => {
     });
 
     if (response) {
+      console.log(response?.data);
       return response?.data;
     }
   } catch (e) {

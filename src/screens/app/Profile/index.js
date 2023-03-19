@@ -1,12 +1,23 @@
-import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import React, {useContext, useEffect} from 'react';
+import {Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {ProfileContext} from '../../../../App';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import ListItem from '../../../components/ListItem';
+import {getProfile} from '../../../utils/backendCalls';
 import {styles} from './styles';
 const Profile = ({navigation}) => {
+  const {profile, setProfile} = useContext(ProfileContext);
+
   const num = 10;
+  useEffect(() => {
+    (async () => {
+      const data = await getProfile();
+      setProfile(data);
+    })();
+  }, []);
+
   const onLogout = () => {};
   const onSettingsPress = () => {
     navigation.navigate('Settings');
@@ -22,8 +33,8 @@ const Profile = ({navigation}) => {
       <Header title="Profile" showLogout onLogout={onLogout} />
       <View style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.name}>User Name</Text>
-          <Text style={styles.email}>User Email</Text>
+          <Text style={styles.name}>{profile?.fullName}</Text>
+          <Text style={styles.email}>{profile?.email}</Text>
           <ListItem
             onPress={onMyListingsPress}
             title="My Listings"

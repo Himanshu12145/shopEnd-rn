@@ -1,10 +1,10 @@
 import axios from 'axios';
-import Config from 'react-native-config';
+import {API_BASE_URL} from '@env';
 
 export const request = ({url, method, data, headers}) => {
   return axios({
     method: method || 'get',
-    url: `https://listicle.deegeehub.com/api${url}`,
+    url: `${API_BASE_URL}${url}`,
     data,
     headers,
   });
