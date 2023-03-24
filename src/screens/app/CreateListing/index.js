@@ -23,7 +23,7 @@ const CreateListing = ({navigation}) => {
   const [images, setImages] = useState([]);
   const [values, setValues] = useState({});
   const [loading, setLoading] = useState(false);
-  // const {setServices} = useContext(ServicesContext);
+  const {setServices} = useContext(ServicesContext);
 
   const goBack = () => {
     navigation.goBack();
@@ -53,26 +53,25 @@ const CreateListing = ({navigation}) => {
     setValues(val => ({...val, [key]: value}));
   };
 
-  // const onSubmit = async () => {
-  //   const img = images?.length ? images[0] : null;
-  //   const data = {
-  //     ...values,
-  //     category: values.category?.id,
-  //   };
+  const onSubmit = async () => {
+    const img = images?.length ? images[0] : null;
+    const data = {
+      ...values,
+      category: values.category?.id,
+    };
 
-  //   if (img) {
-  //     data.image = {
-  //       uri: img?.uri,
-  //       name: img?.fileName,
-  //       type: img?.type,
-  //     };
-  //   }
-  //   const updatedServices = await addService(data);
-  //   setServices(updatedServices);
-  //   // setValues({});
-  //   navigation.navigate('MyListings');
-  // };
-  const onSubmit = () => {};
+    if (img) {
+      data.image = {
+        uri: img?.uri,
+        name: img?.fileName,
+        type: img?.type,
+      };
+    }
+    const updatedServices = await addService(data);
+    setServices(updatedServices);
+    setValues({});
+    navigation.navigate('MyListings');
+  };
 
   return (
     <SafeAreaView>

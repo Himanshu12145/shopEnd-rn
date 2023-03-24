@@ -8,10 +8,13 @@ import Routes from './Routes';
 
 export const UserContext = React.createContext();
 export const ProfileContext = React.createContext();
+export const ServicesContext = React.createContext([]);
 
 function App() {
   const [user, setUser] = useState();
   const [profile, setProfile] = useState();
+  const [services, setServices] = useState();
+
   useEffect(() => {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -25,7 +28,9 @@ function App() {
     <SafeAreaProvider>
       <UserContext.Provider value={{user, setUser}}>
         <ProfileContext.Provider value={{profile, setProfile}}>
-          <Routes />
+          <ServicesContext.Provider value={{services, setServices}}>
+            <Routes />
+          </ServicesContext.Provider>
         </ProfileContext.Provider>
       </UserContext.Provider>
     </SafeAreaProvider>

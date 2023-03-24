@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
-import Input from '../Input';
+import React from 'react';
+import {Image, Pressable, Text} from 'react-native';
 import {styles} from './styles';
+import {API_BASE_URL} from '@env';
 
 const ProductHomeItem = ({title, price, image, onPress}) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <Image source={{uri: image}} style={styles.image} />
+      <Image
+        source={{uri: `${API_BASE_URL}/${image?.path}`}}
+        style={styles.image}
+      />
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.price}>{price}</Text>
+      <Text style={styles.price}>₹ {price}</Text>
     </Pressable>
   );
 };

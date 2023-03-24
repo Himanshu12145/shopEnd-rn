@@ -1,21 +1,20 @@
 import React, {useContext} from 'react';
 import {ScrollView, Text, Image, View, Pressable, Linking} from 'react-native';
 import {styles} from './styles';
-// import Config from 'react-native-config';
+import {API_BASE_URL} from '@env';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Button from '../Button';
 import ImageCarousel from '../ImageCarousel';
+import {updateService} from '../../utils/backendCalls';
+import {ServicesContext} from '../../../App';
 // import ImageCarousel from '../../../components/ImageCarousel';
-// import {updateService} from '../../../utils/backendCalls';
-// import {ServicesContext} from '../../../../App';
 
 const ProductDetails = ({route, navigation}) => {
-  // const params = route?.params || {};
-  // const {services, setServices} = useContext(ServicesContext);
-  // const product = services?.find(
-  //   service => service?._id === params?.product?._id,
-  // );
-  const {product} = route?.params || {};
+  const params = route?.params || {};
+  const {services, setServices} = useContext(ServicesContext);
+  const product = services?.find(
+    service => service?._id === params?.product?._id,
+  );
   const onBackPress = () => {
     navigation.goBack();
   };
@@ -30,12 +29,10 @@ const ProductDetails = ({route, navigation}) => {
     Linking.openURL(`mailto:${email}`);
   };
 
-  const onBookmark = () => {};
-
-  // const onBookmark = async () => {
-  //   const data = await updateService(product?._id, {liked: true});
-  //   setServices(data);
-  // };
+  const onBookmark = async () => {
+    const data = await updateService(product?._id, {liked: true});
+    setServices(data);
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -43,12 +40,15 @@ const ProductDetails = ({route, navigation}) => {
         {product?.images?.length ? (
           <ImageCarousel images={product?.images} />
         ) : (
-          <Image style={styles.image} source={{uri: product?.image}} />
+          <Image
+            style={styles.image}
+            source={{uri: `${API_BASE_URL}/${product?.image?.path}`}}
+          />
         )}
 
         <View style={styles.content}>
           <Text style={styles.title}>{product?.title}</Text>
-          <Text style={styles.price}>{product?.price}</Text>
+          <Text style={styles.price}>₹ {product?.price}</Text>
           <Text style={styles.description}>{product?.description}</Text>
         </View>
 
@@ -71,7 +71,6 @@ const ProductDetails = ({route, navigation}) => {
             }
           />
         </Pressable>
-
         <Button onPress={onContact} title="Contact Seller" />
       </View>
       {/* <ScrollView style={styles.container}>

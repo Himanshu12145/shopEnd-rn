@@ -1,40 +1,49 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {FlatList, View} from 'react-native';
 import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
 import {categories} from '../../../data/categories';
 import CategoryBox from '../../../components/CategoryBox';
-import {products} from '../../../data/products';
 import ProductHomeItem from '../../../components/ProductHomeItem';
+import {getServices} from '../../../utils/backendCalls';
+import {ServicesContext} from '../../../../App';
 
 const Home = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState();
-  const [filteredProducts, setFilteredProducts] = useState(products);
   const [keyword, setKeyword] = useState();
+  const [filteredProducts, setFilteredProducts] = useState(services);
+  const {services, setServices} = useContext(ServicesContext);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getServices();
+      setServices(data);
+    })();
+  }, []);
 
   useEffect(() => {
     if (selectedCategory && !keyword) {
-      const updatedProducts = products.filter(
+      const updatedProducts = services.filter(
         product => String(product?.category) === String(selectedCategory),
       );
       setFilteredProducts(updatedProducts);
     } else if (selectedCategory && keyword) {
-      const updatedProducts = products.filter(
+      const updatedProducts = services.filter(
         product =>
           String(product?.category) === String(selectedCategory) &&
           product?.title?.toLowerCase().includes(keyword?.toLowerCase()),
       );
       setFilteredProducts(updatedProducts);
     } else if (!selectedCategory && keyword) {
-      const updatedProducts = products.filter(product =>
+      const updatedProducts = services.filter(product =>
         product?.title?.toLowerCase().includes(keyword?.toLowerCase()),
       );
       setFilteredProducts(updatedProducts);
     } else if (!keyword && !selectedCategory) {
-      setFilteredProducts(products);
+      setFilteredProducts(services);
     }
-  }, [selectedCategory, keyword]);
+  }, [selectedCategory, keyword, services]);
 
   const renderCategoryItem = ({item, index}) => {
     return (
@@ -47,12 +56,15 @@ const Home = ({navigation}) => {
       />
     );
   };
+
   const renderProductItem = ({item}) => {
     const onProductPress = product => {
       navigation.navigate('ProductDetails', {product});
     };
-    return <ProductHomeItem {...item} onPress={() => onProductPress(item)} />;
+
+    return <ProductHomeItem onPress={() => onProductPress(item)} {...item} />;
   };
+
   return (
     <SafeAreaView>
       <Header
@@ -61,20 +73,22 @@ const Home = ({navigation}) => {
         keyword={keyword}
         title="Find All You Need"
       />
+
       <FlatList
-        horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.list}
+        horizontal
         data={categories}
         renderItem={renderCategoryItem}
         keyExtractor={(item, index) => String(index)}
       />
+
       <FlatList
-        numColumns={2}
         style={styles.productsList}
+        numColumns={2}
         data={filteredProducts}
         renderItem={renderProductItem}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={item => String(item._id)}
         ListFooterComponent={<View style={{height: 200}} />}
       />
     </SafeAreaView>
